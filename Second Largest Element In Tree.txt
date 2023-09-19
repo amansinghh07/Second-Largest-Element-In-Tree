@@ -1,0 +1,34 @@
+public class Solution {
+
+/*	TreeNode structure 
+ * 
+ * class TreeNode<T> {
+		T data;
+		ArrayList<TreeNode<T>> children;
+
+		TreeNode(T data){
+			this.data = data;
+			children = new ArrayList<TreeNode<T>>();
+		}
+	}*/
+	
+	private static TreeNode<Integer>Largest=new TreeNode<>(Integer.MIN_VALUE);
+	private static TreeNode<Integer>SecondLargest=new TreeNode<>(Integer.MIN_VALUE);
+
+	
+	public static TreeNode<Integer> findSecondLargest(TreeNode<Integer> root){
+    if(root.data>Largest.data){
+		if (Largest.data!=Integer.MIN_VALUE){
+			SecondLargest=Largest;
+		}
+		Largest=root;
+	}
+	else if(root.data>SecondLargest.data&&root.data<Largest.data){
+		SecondLargest=root;
+	}
+	for (int i=0;i<root.children.size();i++){
+		findSecondLargest(root.children.get(i));
+	}
+	return SecondLargest;
+	}	
+}
